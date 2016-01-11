@@ -61,10 +61,15 @@ class copy_generator(object):
 
         while True:
             self.E('ADD1')
-            try:
-                result = int(num_a[-1-self.i1]) + int(num_a[-1-self.i2]) + carry
-            except:
-                import ipdb; ipdb.set_trace()
+
+            a_idx = self.N-self.i1-1
+            b_idx = self.N-self.i2-1
+
+            if a_idx < 0 or b_idx < 0:
+                break
+            else:
+                result = int(num_a[a_idx]) + int(num_a[b_idx]) + carry
+
             if  result >= 10:
                 self.E('ACT', ['OUT', 'WRITE', result-10])
                 self.E('CARRY')
@@ -93,7 +98,6 @@ class copy_generator(object):
             arg3 = args[2] if len(args) == 3 else None
 
             if args[0] == 'OUT':
-                import ipdb; ipdb.set_trace()
                 if args[1] == 'LEFT':
                     self.i4 += 1
                 elif args[1] == 'RIGHT':
@@ -137,7 +141,7 @@ class copy_generator(object):
             if args:
                 new_args = []
                 new_args.append(arg1s_rev[args[0]])
-                if args[1]:
+                if args[1] != None:
                     new_args.append(arg2s_rev[args[1]])
                 else:
                     new_args.append(None)
