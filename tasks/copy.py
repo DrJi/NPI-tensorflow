@@ -31,7 +31,7 @@ progs_rev = {v:k for k,v in progs.items()}
 arg1s_rev = {v:k for k,v in arg1s.items()}
 arg2s_rev = {v:k for k,v in arg2s.items()}
 
-class copy_generator(object):
+class Copy(object):
     def __init__(self, K=K, N=N, Q_size=Q_size):
         self.Q_size = Q_size
         self.N = N

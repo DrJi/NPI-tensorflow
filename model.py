@@ -1,40 +1,43 @@
 import tensorflow as tf
 
-env_dim = None # Dimension of environment
-arg_dim = 3 # Dimension of arguments
+class NPI(object):
+    def __init__(self, env_dim, enc_dim, hid_dim,
+                 prog_dim, prog_count,
+                 arg_dim=3, lstm_size=2, r_dim=1, k_dim=1, alpha=0.5):
+        self.env_dim = env_dim # Dimension of environment
 
-enc_dim = None # Dimension of encoder [D]
-hid_dim = None # Dimension of program [M]
-prog_dim = None # Dimension of program [P]
-prog_count = None # Current number of programs in memory [N]
+        self.enc_dim = enc_dim # Dimension of encoder [D]
+        self.hid_dim = hid_dim # Dimension of program [M]
+        self.prog_dim = prog_dim # Dimension of program [P]
+        self.prog_count = prog_count # Current number of programs in memory [N]
 
-lstm_size = 3 # The number of layers in LSTM [l]
+        self.arg_dim = arg_dim # Dimension of arguments
+        self.lstm_size = lstm_size # The number of layers in LSTM [l]
 
-r_dim = 1
-k_dim = 1 # Dimension of key embedding for retrieving the next program, can be P>>K because key is just identifier [K]
+        self.r_dim = r_dim
+        self.k_dim = k_dim # Dimension of key embedding for retrieving the next program
+                           # Can be P>>K because key is just identifier [K]
 
-# feed-forward steps
+        self.env = tf.placeholder(tf.float32, [e_dim], name='environment')
+        self.arg = tf.placeholder(tf.float32, [a_dim], name='arguments')
 
-h_prev = 0 #[]
-c_prev = 0 #[]
+        self.self.alpha = alpha
 
-env = tf.placeholder(tf.float32, [e_dim], name='environment')
-arg = tf.placeholder(tf.float32, [a_dim], name='arguments')
-# arg = [arg_1, arg_2, arg_3]
+        self.h_prev = 0
+        self.c_prev = 0
 
-def __init__(self, alpha, ):
-    self.alpha= alpha
+        self.core_cell = 
 
-def init_module(self):
-    self.h = 0
-    self.r = 0
+    def init_module(self):
+        self.h = 0
+        self.r = 0
 
-    # N : The current number of programs in memory
-    M_key = tf.Variable(tf.float32, [prog_count, k_dim]) # N x K, storing program keys
-    M_prog = tf.Variable(tf.float32, [prog_count, prog_dim]) # N x P, storing program embeddings
+        # N : The current number of programs in memory
+        M_key = tf.Variable(tf.float32, [prog_count, k_dim]) # N x K, storing program keys
+        M_prog = tf.Variable(tf.float32, [prog_count, prog_dim]) # N x P, storing program embeddings
 
-    p_emb = tf.Variable(tf.float32, [prog_dim], name='program') # the current program embedding
-    p_true  = tf.placeholder(tf.float32, [], name='ground-truth program identifier')
+        p_emb = tf.Variable(tf.float32, [prog_dim], name='program') # the current program embedding
+        p_true  = tf.placeholder(tf.float32, [], name='ground-truth program identifier')
 
 def run(self, e, p_idx, args):
     h = 0
